@@ -1,0 +1,49 @@
+.p-0 {
+    padding: 0;
+}
+
+.img {
+    width: 100% !important;
+    border-radius: 30px;
+    margin-top: 10px;
+    height: 210px;
+}
+
+.logo {
+    width: 100px;
+    height: 40px;
+}
+
+footer {
+    padding-bottom: 25px;
+}
+
+#copyrights {
+    bottom: 5px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    padding-top: 25px;
+}
+
+.contactWrap {
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+    line-height: 40px;
+    color: white;
+}
+
+.contactIcon {
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 10px;
+}
+
+.underline {
+    border-bottom: 1px solid white;
+    padding-bottom: 25px;
+}
+
+
