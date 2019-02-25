@@ -21,7 +21,8 @@ class DB
     private function __clone() {}
     private function __construct()
     {
-        $this->mysqli = new mysqli("localhost", "root", "", "blog_cars");
+        $this->mysqli = new mysqli("localhost", "phpmyadmin", "123456", "blog_cars");
+        $this->mysqli->set_charset('utf8');
     }
 
     /**

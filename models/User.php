@@ -20,7 +20,7 @@ class User
         foreach ($users as $user) {
             $user_object = new User();
             $user_object->load_by_data($user['user_id'], $user['user_name'], $user['user_email'],
-                                         $user['user_password']);
+                                       $user['user_password']);
             $user_objects[] = $user_object;
         }
         return $user_objects;
@@ -70,11 +70,12 @@ class User
 
         if (mb_strlen($password) < 4 || $password == '') {
             var_dump('Пароль не менее 4 символа!');
+            
             return false;
         }
 
         $id = $mysqli->db_insert("INSERT INTO users (user_name, user_email, user_password)
-                                         VALUES ('$name', '$email', '$password')");
+                                  VALUES ('$name', '$email', '$password')");
 
         $this->load_by_data($id, $name, $email, $password);
 

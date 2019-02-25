@@ -1,4 +1,4 @@
-<?php if ($_REQUEST['enter'] == '0') { ?>
+<?php if ($_REQUEST['auth'] == '0') { ?>
     <div class="modal fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -23,4 +23,4 @@
             $('#notification').modal('show');
         });
     </script>
-<? } ?>
+<?php } ?>
