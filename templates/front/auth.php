@@ -12,7 +12,7 @@
                     <form method="post" action="index.php?dispatch=login">
                         <div class="form-froup">
                             <label for="exampleInputPass">Введите Email</label>
-                            <input type="email" name="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email" required>
+                            <input id="exampleInputPass" type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Email" required>
                         </div>
                         <div class="form-froup">
                             <label for="exampleInputPass">Введите пароль</label>

@@ -70,7 +70,7 @@ class User
 
         if (mb_strlen($password) < 4 || $password == '') {
             var_dump('Пароль не менее 4 символа!');
-            
+
             return false;
         }
 
@@ -138,10 +138,12 @@ class User
     public static function userExist($email, $password)
     {
         $mysqli = DB::getInstance();
-        $result = $mysqli->db_get_row("SELECT user_id FROM users WHERE user_email = '$email' AND user_password = '$password'");
-        if (!$result) {
+        $hashPass = $mysqli->db_get_row("SELECT user_password FROM users WHERE user_email = '$email'");
+        if (password_verify($password, $hashPass['user_password'])) {
+            $result = $mysqli->db_get_row("SELECT user_id FROM users WHERE user_email = '$email'");
+            return $result['user_id'];
+        }else {
             return false;
         }
-        return $result['user_id'];
     }
 }

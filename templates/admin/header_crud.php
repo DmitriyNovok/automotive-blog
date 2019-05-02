@@ -14,13 +14,12 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar bg-light sticky-top">
         <div class="container">
-            <!--Доделать адаптивное меню-->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSuportedContent">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a href="index.php?dispatch=index" class="nav-link">Главная</a>

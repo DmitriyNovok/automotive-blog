@@ -10,8 +10,8 @@
 <tbody>
 <?php foreach ($users as $user) { ?>
     <tr>
-        <td><a href="admin.php?dispatch=user_read&id=<?= $user->id ?>"><?= $user->id ?></a></td>
-        <td><?= $user->name ?></td>
+        <td><?= $user->id ?></td>
+        <td><a href="admin.php?dispatch=user_read&id=<?= $user->id ?>"><?= $user->name ?></td></a>
         <td><?= $user->email ?></td>
         <td><?= $user->get_count_articles() ?></td>
         <td>

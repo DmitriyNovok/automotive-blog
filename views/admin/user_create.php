@@ -5,18 +5,18 @@
 <form action="admin.php" method="post" id="user-create-form">
     <div class="container">
         <div class="form-group">
-            <label>Имя пользователя</label>
-            <input type="text" class="form-control" name="user_name">
+            <label for="user_name">Имя пользователя</label>
+            <input id="user_name" type="text" class="form-control" name="user_name">
         </div>
 
         <div class="form-group">
-            <label>E-mail</label>
-            <input type="email" class="form-control" name="user_email">
+            <label for="user_email">E-mail</label>
+            <input id="user_email" type="email" class="form-control" name="user_email">
         </div>
 
         <div class="form-group">
-            <label>Пароль</label>
-            <input type="password" class="form-control" name="user_password">
+            <label for="pass">Пароль</label>
+            <input id="pass" type="password" class="form-control" name="user_password">
         </div><br>
 
         <input type="hidden" name="dispatch" value="user_create">

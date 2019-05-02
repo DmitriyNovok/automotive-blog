@@ -12,13 +12,13 @@
 
             <div class="form-group">
                 <label>E-mail</label>
-                <input type="email" class="form-control" name="user_email" value="<?= $user->email ?>">
+                <input type="text" class="form-control" name="user_email" value="<?= $user->email ?>">
                 <input type="hidden" name="user_id" value="<?= $user->id ?>">
             </div>
 
             <div class="form-group">
                 <label>Пароль</label>
-                <input type="password" class="form-control" name="user_password" value="<?= $user->password ?>">
+                <input type="text" class="form-control" name="user_password" value="<?= $user->password ?>">
             </div><br>
 
 
