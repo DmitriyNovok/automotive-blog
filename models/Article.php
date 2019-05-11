@@ -21,13 +21,13 @@ class Article
      * @param $order
      * @return Article[]
      */
-    public static function get_all_articles($limit = 10, $order = false)
+    public static function getArticlesAll($limit = 10, $order = false)
     {
         $articles = DB::run("SELECT * FROM articles " . ($order ? 'ORDER BY article_id DESC' : '') . " LIMIT $limit");
         $article_objects = [];
         foreach ($articles as $article) {
             $article_object = new Article();
-            $article_object->load_by_data($article['article_id'], $article['article_title'], $article['article_text'],
+            $article_object->dataLoad($article['article_id'], $article['article_title'], $article['article_text'],
                                           $article['article_date'], $article['user_id'], $article['article_image'], $article['article_icon']);
             $article_objects[] = $article_object;
         }
@@ -52,7 +52,7 @@ class Article
         }
     }
 
-    private function load_by_data($id, $title, $text, $date, $user_id, $image = false, $icon = false)
+    private function dataLoad($id, $title, $text, $date, $user_id, $image = false, $icon = false)
     {
         $this->id = $id;
         $this->title = $title;
@@ -68,7 +68,7 @@ class Article
     {
         $id = DB::run("INSERT INTO articles (article_title, article_text, article_date, user_id)
                              VALUES (?, ?, ?)", [$title, $text, $date, $user_id]);
-        $this->load_by_data($id, $title, $text, $date, $user_id, $image = false);
+        $this->dataLoad($id, $title, $text, $date, $user_id, $image = false);
         return true;
     }
 
@@ -87,8 +87,8 @@ class Article
             var_dump('Такого пользователя не существует!');
             return false;
         }
-        DB::run("UPDATE articles SET article_title = ?, article_text = ?,article_date = ?, user_id = ?
-                       WHERE article_id = ?", [$new_title, $new_text, $new_date, $this->id]);
+        DB::run("UPDATE articles SET article_title = ?, article_text = ?, article_date = ?, user_id = ?
+                       WHERE article_id = ?", [$new_title, $new_text, $new_date, $new_user_id, $this->id]);
         $this->title = $new_title;
         $this->text = $new_text;
         $this->date = $new_date;

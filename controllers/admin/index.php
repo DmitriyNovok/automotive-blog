@@ -1,6 +1,4 @@
 <?php
-
-$articles = Article::get_all_articles(10);
-$users = User::get_all_users();
-
+$articles = Article::getArticlesAll(10);
+$users = User::getUsersAll();
 require_once 'views/admin/admin.php';

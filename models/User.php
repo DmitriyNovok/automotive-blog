@@ -10,13 +10,13 @@ class User
      * Возвращает все данные по юзерам из базы данных
      * @return User[]
      */
-    public static function get_all_users()
+    public static function getUsersAll()
     {
         $users = DB::run("SELECT * FROM users");
         $user_objects = [];
         foreach ($users as $user) {
             $user_object = new User();
-            $user_object->load_by_data($user['user_id'], $user['user_name'], $user['user_email'], $user['user_password']);
+            $user_object->dataLoad($user['user_id'], $user['user_name'], $user['user_email'], $user['user_password']);
             $user_objects[] = $user_object;
         }
         return $user_objects;
@@ -36,7 +36,7 @@ class User
         }
     }
 
-    private function load_by_data($id, $name, $email, $password)
+    private function dataLoad($id, $name, $email, $password)
     {
         $this->id = $id;
         $this->name = $name;
@@ -53,8 +53,8 @@ class User
      */
     public function create($name, $email, $password)
     {
-        $result = DB::run("SELECT user_id FROM users WHERE user_email = ?", [$email]);
-        if ($result) {
+        $id = DB::run("SELECT user_id FROM users WHERE user_email = ?", [$email]);
+        if (!$id) {
             var_dump('Такой email уже существует!');
             return false;
         }
@@ -63,8 +63,7 @@ class User
             return false;
         }
         $id = DB::run("INSERT INTO users (user_name, user_email, user_password) VALUES (?, ?, ?)", [$name, $email, $password]);
-
-        $this->load_by_data($id, $name, $email, $password);
+        $this->dataLoad($id, $name, $email, $password);
         return true;
     }
 
@@ -90,10 +89,10 @@ class User
     }
 
     /**
-     * Возвращает количество статей опубликованных юзером
+     * Возвращает количество статей опубликованных пользователем
      * @return int
      */
-    public function get_count_articles()
+    public function getCountArticles()
     {
         $count = DB::run("SELECT COUNT(articles.article_id) as article_count FROM users
                                 LEFT JOIN articles ON users.user_id = articles.user_id 
@@ -112,8 +111,8 @@ class User
     {
         $hashPass = DB::run("SELECT user_password FROM users WHERE user_email = ?", [$email])->fetchColumn();
         if (password_verify($password, $hashPass)) {
-            $user_id = DB::run("SELECT user_id FROM users WHERE user_email = ?", [$email])->fetchColumn();
-            return $user_id;
+            $id = DB::run("SELECT user_id FROM users WHERE user_email = ?", [$email])->fetchColumn();
+            return $id;
         } else {
             return false;
         }
