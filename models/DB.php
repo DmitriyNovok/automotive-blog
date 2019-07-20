@@ -3,14 +3,11 @@
 class DB
 {
     private static $instance = null;
-    /**
-     * Функция проверяет был ли уже создан объект, если нет, то создает
-     *
-     */
+
     public static function instance()
     {
         if (self::$instance === null) {
-            require_once 'define.php';
+            include 'define.php';
             $dsn = 'mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset='.DB_CHAR;
             $options = [
                 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -21,15 +18,11 @@ class DB
                 self::$instance = new PDO($dsn, DB_USER, DB_PASS, $options);
             }catch(PDOException $e){
                 print "Error!: " . $e->getMessage() . "<br/>";
-                die();
+                exit;
             }
         }
         return self::$instance;
     }
-
-    private function __clone() {}
-
-    private function __construct() {}
 
     public static function run($query, $param = [])
     {
