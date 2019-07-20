@@ -46,4 +46,13 @@ footer {
     padding-bottom: 25px;
 }
 
+.flex-container {
+    display: -webkit-flex;
+    -webkit-flex-flow: row wrap;
+    -webkit-align-content: flex-end;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: flex-end;
+    height: 70px;
+}
 

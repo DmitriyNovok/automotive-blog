@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <div id="copyrights">&copy; ProjectCars</div>
+        <div id="copyrights">&copy; ProjectCars <?= date('Y') ?></div>
     </div>
 </footer>
 

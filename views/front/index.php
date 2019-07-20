@@ -11,11 +11,12 @@
 
 <div class="container-fluid p-0">
     <div class="container">
-        <h2>Последние статьи:</h2>
-        <div class="row text-center">
-            <?php foreach ($articles as $article) {
-                require 'templates/front/article_preview.php';
-            } ?>
+        <h2>Опубликованные статьи:</h2>
+        <div class="row">
+            <?php foreach ($articles as $article) : ?>
+               <?php require 'templates/front/article_preview.php'; ?>
+            <?php endforeach ?>
+        </div>
     </div>
 </div><br><br><br><br>
 
