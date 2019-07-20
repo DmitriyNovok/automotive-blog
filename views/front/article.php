@@ -1,7 +1,7 @@
 <?php require_once 'templates/front/header.php' ?>
 
 <?php if (isset($article->title)) { ?>
-    <img class="d-block w-100" src="data/img/<?= $article->icon ?>"><br><br>
+    <img class="d-block w-100" src="public/web/img/<?= $article->icon ?>"><br><br>
     <h2 class="text-center"><?= $article->title ?></h2>
     <p class="text-center">Дата публикации: <?= $article->date ?></p>
     <p class="text-center">Автор статьи: <?= $article->user->name ?></p>

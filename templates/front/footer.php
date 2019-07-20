@@ -3,21 +3,21 @@
         <div class="row underline">
             <div class="col-sm-4">
                 <div class="contactWrap"><br>
-                    <img src="data/img/envelope.svg" class="contactIcon">
+                    <img src="public/web/img/envelope.svg" class="contactIcon">
                     info@cars_project.ru
                 </div>
             </div>
 
             <div class="col-sm-4">
                 <div class="contactWrap"><br>
-                    <img src="data/img/phone-call.svg" class="contactIcon">
+                    <img src="public/web/img/phone-call.svg" class="contactIcon">
                     8 800 555 00 00
                 </div>
             </div>
 
             <div class="col-sm-4">
                 <div class="contactWrap"><br>
-                    <img src="data/img/placeholder.svg" class="contactIcon">
+                    <img src="public/web/img/placeholder.svg" class="contactIcon">
                     Москва, пр-т Ломоносовский, д. 32
                 </div>
             </div>
