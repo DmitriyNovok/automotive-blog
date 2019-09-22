@@ -9,3 +9,4 @@ if ($_REQUEST['dispatch'] == NULL) {
 } else {
     require_once 'controllers/front/' . $dispatch . '.php';
 }
+
