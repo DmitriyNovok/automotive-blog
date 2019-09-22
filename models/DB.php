@@ -7,7 +7,7 @@ class DB
     public static function instance()
     {
         if (self::$instance === null) {
-            include 'define.php';
+            require_once 'define.php';
             $dsn = 'mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset='.DB_CHAR;
             $options = [
                 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
