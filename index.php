@@ -143,7 +143,10 @@ function processMessage($message) {
             case '/start';
                 apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => 'Hello', 'reply_markup' =>
                     [
-                        'keyboard' => [['Hello', 'Hi', 'Privet', 'Zdarova bratan']],
+                        'keyboard' => [['Hello',
+                                        'Hi',
+                                        'Zdarova Bratan!',
+                                        'Privet']],
                         'one_time_keyboard' => true,
                         'resize_keyboard' => true
                     ]]);
