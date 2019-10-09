@@ -147,7 +147,7 @@ function processMessage($message) {
         } else if ($text === "Hello" || $text === "Hi") {
             apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Nice to meet you'));
         } else if (strpos($text, "/stop") === 0) {
-            // stop now
+            apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Stop ? Can not stop me , BRO! ;)'));
         } else {
             apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => 'Cool'));
         }
