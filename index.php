@@ -164,6 +164,16 @@ function processMessage($message) {
                 apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Stop ? Can not stop me , BRO! ;)'));
                 break;
 
+
+
+
+            case 'Zdarova bratan';
+                apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Zdarova Bratuha!!! ;)'));
+                break;
+
+
+
+
             default:
                 apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
         }
