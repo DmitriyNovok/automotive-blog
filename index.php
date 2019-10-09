@@ -147,6 +147,13 @@ function processMessage($message) {
                     'resize_keyboard' => true)));
                 break;
 
+            case '/help';
+                apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Hello', 'reply_markup' => array(
+                    'keyboard' => array(array('Hello', 'Hi')),
+                    'one_time_keyboard' => true,
+                    'resize_keyboard' => true)));
+                break;
+
             case 'Hello';
                 apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Nice to meet you'));
                 break;
