@@ -139,27 +139,32 @@ function processMessage($message) {
         // incoming text message
         $text = $message['text'];
 
-        $keyboard = [
-            ['Hello'],
-            ['Hi'],
-            ['Zdarova Bratan!!'],
-            ['Privet']
-        ];
         switch ($text) {
             case '/start';
                 apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => 'Hello', 'reply_markup' =>
                     [
-                        'keyboard' => $keyboard,
+                        'keyboard' => [
+                            ['Hello'],
+                            ['Hi'],
+                            ['Zdarova Bratan!!'],
+                            ['Privet']
+                        ],
                         'one_time_keyboard' => true,
                         'resize_keyboard' => true
                     ]]);
                 break;
 
             case '/help';
-                apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Hello', 'reply_markup' => array(
-                    'keyboard' => array(array('', 'Hi')),
-                    'one_time_keyboard' => true,
-                    'resize_keyboard' => true)));
+                apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => 'Hello', 'reply_markup' =>
+                    [
+                        'keyboard' => [
+                            ['Help'],
+                            ['Guide'],
+                            ['Commands']
+                        ],
+                        'one_time_keyboard' => true,
+                        'resize_keyboard' => true
+                    ]]);
                 break;
 
             case 'Hello';
@@ -172,12 +177,9 @@ function processMessage($message) {
 
 
 
-
-            case 'Zdarova bratan';
+            case 'Zdarova bratan!!';
                 apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Zdarova Bratuha!!! ;)'));
                 break;
-
-
 
 
             default:
