@@ -189,9 +189,11 @@ function processMessage($message) {
                 }
 
                 function allMarks($arr) {
+                    $i = 1;
                     $str = '';
                     foreach ($arr as $item) {
-                        $str .= "$item\n";
+                        $str .= "$i.'.'.$item\n";
+                        $i++;
                     }
                     return $str;
                 }
