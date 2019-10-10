@@ -161,11 +161,11 @@ function processMessage($message) {
                 break;
 
             case '/searchbylocation';
-            apiRequest("sendMessage",['chat_id' => $chat_id, "text" => 'Select country or city in which you want to rent']);
+            apiRequest("sendMessage",['chat_id' => $chat_id, "text" => 'Write name location where you want to find vehicle \xF0\x9F\x91\x87']);
                 break;
 
             case '/searchvehicles';
-                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => 'Select mark and model vehicle']);
+                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => 'Write mark and model vehicle']);
                 break;
 
 
