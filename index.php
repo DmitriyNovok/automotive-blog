@@ -161,7 +161,7 @@ function processMessage($message) {
                 break;
 
             case '/searchbylocation';
-            apiRequest("sendMessage",['chat_id' => $chat_id, "text" => 'Write name location where you want to find vehicle'.hex2bin('F09F9187	')]);
+            apiRequest("sendMessage",['chat_id' => $chat_id, "text" => 'Write name country and city where you want to find vehicle. Example Nice,France'.hex2bin(F09F9187)]);
                 break;
 
             case '/searchvehicles';
@@ -175,34 +175,73 @@ function processMessage($message) {
 
 
             default:
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://dev.getrentacar.com/api/brands.getAll');
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                $out = curl_exec($ch);
-                curl_close($ch);
-                $result = json_decode($out, true);
-
-                $answer = 'If you have any questions contact us. info@getrentacar.com';
-
-                $marks = [];
-                foreach ($result['response']['data'] as $mark) {
-                    if (stripos($mark, $text) !== false) {
-                        $marks[] = $mark;
+                $tmp = [];
+                $vehicles = ORM_Drivers_Mysqlx::find('vehicles', '', [], false);
+                foreach ($vehicles as $vehicle) {
+                    if (__is_clean($tmp[$vehicle['segment']][$vehicle['geo_place_id']])) {
+                        $tmp[$vehicle['segment']][$vehicle['geo_place_id']] = [
+                            'formatted_address' => Google_Places::getById($vehicle['geo_place_id'])['formatted_address'],
+                            'count' => 1,
+                        ];
+                    } else {
+                        $tmp[$vehicle['segment']][$vehicle['geo_place_id']]['count'] = $tmp[$vehicle['segment']][$vehicle['geo_place_id']]['count'] + 1;
                     }
                 }
 
-                function allMarks($arr) {
-                    $i = 1;
-                    $str = '';
-                    foreach ($arr as $item) {
-                        $str .= "$i.$item\n";
-                        $i++;
+                // Убираем повторяющиеся значения
+                $places = [];
+                foreach ($tmp as $segment => $values) {
+                    foreach ($values as $value) {
+                        if (__is_clean($places[$segment][$value['formatted_address']])) {
+                            $places[$segment][$value['formatted_address']] = [
+                                'place' => $value['formatted_address'],
+                                'count' => $value['count'],
+                            ];
+                        } else {
+                            $places[$segment][$value['formatted_address']]['count'] = $places[$segment][$value['formatted_address']]['count'] + $value['count'];
+                        }
                     }
-                    return $str;
                 }
 
-                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => !empty($marks) ? allMarks($marks) : $answer ]);
+                // Сортируем по количеству
+                $tmp = [];
+                foreach ($places as $segment => $values) {
+                    $array = \array_column($values, 'count');
+                    \array_multisort($array, \SORT_DESC, $values);
+                    $tmp[] = $values;
+                }
 
+                $locations = [];
+                foreach ($tmp as $place) {
+                    foreach ($place as $country) {
+                        $locations[] = $country['place'].' '.$country['count'].' vehicles';
+                    }
+                }
+
+                $matchLocation = preg_grep("#$text#i", $locations);
+
+                $answerErr = 'If you have any questions contact us. info@getrentacar.com';
+
+                if (!__is_clean($matchLocation)) {
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, 'https://dev.getrentacar.com/api/search.getHints?pickup[location]='.$text);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    $out = curl_exec($ch);
+                    curl_close($ch);
+                    $result = json_decode($out, true);
+
+
+                    $answer = [];
+                    foreach ($result['response']['data'] as $res) {
+
+                        $answer[] = $res['brand']['name'].' '.$res['model']['name'].' '.$res['price_day'].''.$res['currency']['name']['code'].' per day';
+
+                    }
+
+                    apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => $answer ]);
+                } else {
+                    apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => $answerErr ]);
+                }
         }
     }
 }
