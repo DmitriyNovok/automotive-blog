@@ -155,16 +155,7 @@ function processMessage($message) {
                 break;
 
             case '/help';
-                apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => 'Hello', 'reply_markup' =>
-                    [
-                        'keyboard' => [
-                            ['Help'],
-                            ['Guide'],
-                            ['Commands']
-                        ],
-                        'one_time_keyboard' => true,
-                        'resize_keyboard' => true
-                    ]]);
+                apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => 'Команды: /help - вывод справки']);
                 break;
 
             case 'Hello';
