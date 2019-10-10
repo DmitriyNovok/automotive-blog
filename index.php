@@ -19,6 +19,7 @@
 
 define('BOT_TOKEN', '935790601:AAEJP5HwHkkppoK6rL6D3eVESBx1Q_s1j8Y');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
+define('GRAC_API_URL','https://dev.getrentacar.com/api/brands.getAll');
 
 function apiRequestWebhook($method, $parameters) {
     if (!is_string($method)) {
@@ -173,7 +174,17 @@ function processMessage($message) {
 
 
             default:
-                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => 'If you have any questions contact us. info@getrentacar.com']);
+
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, GRAC_API_URL);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $out = curl_exec($ch);
+                curl_close($ch);
+
+                $result = json_decode($out, true);
+
+
+                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => $result]);
         }
     }
 }
