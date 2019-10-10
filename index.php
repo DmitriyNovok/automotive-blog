@@ -186,7 +186,7 @@ function processMessage($message) {
 
                 $marks = [];
                 foreach ($result['response']['data'] as $mark) {
-                    if (stripos($mark, $text) != false) {
+                    if (stripos($mark, $text) !== false) {
                         $marks[] = $mark;
                     }
                 }
