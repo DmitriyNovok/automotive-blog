@@ -19,7 +19,6 @@
 
 define('BOT_TOKEN', '935790601:AAEJP5HwHkkppoK6rL6D3eVESBx1Q_s1j8Y');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
-define('WEBHOOK_URL', 'https://kubinx.herokuapp.com/index.php');
 
 function apiRequestWebhook($method, $parameters) {
     if (!is_string($method)) {
@@ -145,7 +144,6 @@ function processMessage($message) {
                 apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => "Welcome to search bot by GetRentacar.com!\nСhoose your interest сommand. /help for reference.", 'reply_markup' =>
                     [
                         'keyboard' => [
-                            ['/start']
                             ['/help'],
                             ['/searchbylocation'],
                             ['/searchvehicles'],
@@ -181,6 +179,7 @@ function processMessage($message) {
 }
 
 
+define('WEBHOOK_URL', 'https://kubinx.herokuapp.com/index.php');
 
 if (php_sapi_name() == 'cli') {
     // if run from console, set or delete webhook
