@@ -141,7 +141,7 @@ function processMessage($message) {
 
         switch ($text) {
             case '/start';
-                apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => 'Welcome to search bot by GetRentacar.com! Сhoose your interest сommand. /help for reference', 'reply_markup' =>
+                apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => "Welcome to search bot by GetRentacar.com!\nСhoose your interest сommand. /help for reference.", 'reply_markup' =>
                     [
                         'keyboard' => [
                             ['/help'],
@@ -155,10 +155,7 @@ function processMessage($message) {
                 break;
 
             case '/help';
-                apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => 'Command: 
-                                                                                        /help - Guide
-                                                                                        /searchbylocation - Search in country or city 
-                                                                                        /searchvehicles - Search name vehicle']);
+                apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => "Command:/help - Guide\n/searchbylocation - Search in country or city\n/searchvehicles - Search name vehicle"]);
                 break;
 
             case 'Hello';
@@ -168,7 +165,6 @@ function processMessage($message) {
             case '/stop';
                 apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Stop ? Can not stop me , BRO! ;)'));
                 break;
-
 
 
             case 'Zdarova';
