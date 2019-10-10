@@ -155,11 +155,14 @@ function processMessage($message) {
                 break;
 
             case '/help';
-                apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => 'Команды: /help - вывод справки']);
+                apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => 'Command: 
+                                                                                        /help - Guide
+                                                                                        /searchbylocation - Search in country or city 
+                                                                                        /searchvehicles - Search name vehicle']);
                 break;
 
             case 'Hello';
-                apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Nice to meet you'));
+            apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Nice to meet you'));
                 break;
 
             case '/stop';
