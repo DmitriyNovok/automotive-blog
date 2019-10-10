@@ -161,7 +161,7 @@ function processMessage($message) {
                 break;
 
             case '/searchbylocation';
-            apiRequest("sendMessage",['chat_id' => $chat_id, "text" => 'Write name location where you want to find vehicle \xF0\x9F\x91\x87']);
+            apiRequest("sendMessage",['chat_id' => $chat_id, "text" => 'Write name location where you want to find vehicle'.hex2bin('F09F9187	')]);
                 break;
 
             case '/searchvehicles';
