@@ -144,6 +144,7 @@ function processMessage($message) {
                 apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => "Welcome to search bot by GetRentacar.com!\nСhoose your interest сommand. /help for reference.", 'reply_markup' =>
                     [
                         'keyboard' => [
+                            ['/start']
                             ['/help'],
                             ['/searchbylocation'],
                             ['/searchvehicles'],
@@ -155,25 +156,25 @@ function processMessage($message) {
                 break;
 
             case '/help';
-                apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => "Command:/help - Guide\n/searchbylocation - Search in country or city\n/searchvehicles - Search name vehicle"]);
+                apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => "Command:\n/help - Guide\n/searchbylocation - Search in country or city\n/searchvehicles - Search name vehicle"]);
                 break;
 
             case 'Hello';
-            apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Nice to meet you'));
+            apiRequest("sendMessage",['chat_id' => $chat_id, "text" => 'Nice to meet you']);
                 break;
 
             case '/stop';
-                apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Stop ? Can not stop me , BRO! ;)'));
+                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => 'Stop ? Can not stop me , BRO! ;)']);
                 break;
 
 
             case 'Zdarova';
-                apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Zdarova Bratuha!!! ;)'));
+                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => 'Zdarova Bratuha!!! ;)']);
                 break;
 
 
             default:
-                apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'If you have any questions contact us. info@getrentacar.com'));
+                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => 'If you have any questions contact us. info@getrentacar.com']);
         }
     }
 }
