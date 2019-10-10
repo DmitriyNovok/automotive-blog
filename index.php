@@ -19,6 +19,7 @@
 
 define('BOT_TOKEN', '935790601:AAEJP5HwHkkppoK6rL6D3eVESBx1Q_s1j8Y');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
+define('WEBHOOK_URL', 'https://kubinx.herokuapp.com/index.php');
 
 function apiRequestWebhook($method, $parameters) {
     if (!is_string($method)) {
@@ -159,12 +160,12 @@ function processMessage($message) {
                 apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => "Command:\n/help - Guide\n/searchbylocation - Search in country or city\n/searchvehicles - Search name vehicle"]);
                 break;
 
-            case 'Hello';
-            apiRequest("sendMessage",['chat_id' => $chat_id, "text" => 'Nice to meet you']);
+            case '/searchbylocation';
+            apiRequest("sendMessage",['chat_id' => $chat_id, "text" => 'Select country or city in which you want to rent']);
                 break;
 
-            case '/stop';
-                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => 'Stop ? Can not stop me , BRO! ;)']);
+            case '/searchvehicles';
+                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => 'Select mark and model vehicle']);
                 break;
 
 
@@ -180,7 +181,6 @@ function processMessage($message) {
 }
 
 
-define('WEBHOOK_URL', 'https://kubinx.herokuapp.com/index.php');
 
 if (php_sapi_name() == 'cli') {
     // if run from console, set or delete webhook
