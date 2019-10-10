@@ -177,13 +177,18 @@ function processMessage($message) {
             default:
 
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://dev.getrentacar.com/api/brands.getById?id='.$text);
+                curl_setopt($ch, CURLOPT_URL, 'https://dev.getrentacar.com/api/brands.getAll');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 $out = curl_exec($ch);
                 curl_close($ch);
                 $result = json_decode($out, true);
 
-                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => $result]);
+                $marks = [];
+                foreach ($result['response']['data'] as $mark) {
+                    $marks[] = $mark;
+                }
+
+                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => $marks]);
         }
     }
 }
