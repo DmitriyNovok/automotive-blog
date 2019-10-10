@@ -141,13 +141,13 @@ function processMessage($message) {
 
         switch ($text) {
             case '/start';
-                apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => 'Hello', 'reply_markup' =>
+                apiRequestJson("sendMessage", ['chat_id' => $chat_id, "text" => 'Welcome to search bot by GetRentacar.com! Сhoose your interest сommand. /help for reference', 'reply_markup' =>
                     [
                         'keyboard' => [
-                            ['Hello'],
-                            ['Hi'],
-                            ['Zdarova Bratan!!'],
-                            ['Privet']
+                            ['/help'],
+                            ['/searchbylocation'],
+                            ['/searchvehicles'],
+                            ['Zdarova'],
                         ],
                         'one_time_keyboard' => true,
                         'resize_keyboard' => true
@@ -171,13 +171,13 @@ function processMessage($message) {
 
 
 
-            case 'Zdarova bratan!!';
+            case 'Zdarova';
                 apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Zdarova Bratuha!!! ;)'));
                 break;
 
 
             default:
-                apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
+                apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'If you have any questions contact us. info@getrentacar.com'));
         }
     }
 }
