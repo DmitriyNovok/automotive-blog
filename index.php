@@ -201,7 +201,7 @@ function processMessage($message) {
                     return $str;
                 }
 
-                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => !empty(allMarks($marks)) ? allMarks($marks) : $answer ]);
+                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => !empty($marks) ? allMarks($marks) : $answer ]);
 
         }
     }
