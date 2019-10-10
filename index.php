@@ -188,7 +188,15 @@ function processMessage($message) {
                     $marks[] = $mark;
                 }
 
-                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => $marks]);
+                function allMarks($arr) {
+                    $str = '';
+                    foreach ($arr as $item) {
+                        $str .= "$item\n";
+                    }
+                    return $str;
+                }
+
+                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => allMarks($marks)]);
         }
     }
 }
