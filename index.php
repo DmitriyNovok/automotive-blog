@@ -175,7 +175,6 @@ function processMessage($message) {
 
 
             default:
-
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, 'https://dev.getrentacar.com/api/brands.getAll');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -183,9 +182,13 @@ function processMessage($message) {
                 curl_close($ch);
                 $result = json_decode($out, true);
 
+                $answer = 'If you have any questions contact us. info@getrentacar.com';
+
                 $marks = [];
                 foreach ($result['response']['data'] as $mark) {
-                    $marks[] = $mark;
+                    if (stripos($mark, $text) != false) {
+                        $marks[] = $mark;
+                    }
                 }
 
                 function allMarks($arr) {
@@ -198,7 +201,8 @@ function processMessage($message) {
                     return $str;
                 }
 
-                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => allMarks($marks)]);
+                apiRequest("sendMessage", ['chat_id' => $chat_id, "text" => !empty(allMarks($marks)) ? allMarks($marks) : $answer ]);
+
         }
     }
 }
