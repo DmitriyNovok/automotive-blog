@@ -192,7 +192,7 @@ function processMessage($message) {
                     $i = 1;
                     $str = '';
                     foreach ($arr as $item) {
-                        $str .= "$i.'.'.$item\n";
+                        $str .= "$i.$item\n";
                         $i++;
                     }
                     return $str;
