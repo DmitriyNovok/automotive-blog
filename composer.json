@@ -1,6 +1,9 @@
 {
   "require": {
     "php": ">=7.2",
+    "ext-pdo" : "*",
+    "ext-curl" : "*",
+    "ext-json" : "*",
     "klein/klein": "^2.1"
   }
 }
