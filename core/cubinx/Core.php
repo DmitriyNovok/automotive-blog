@@ -1,6 +1,8 @@
 <?php
 
-use Loader;
+namespace cubinx;
+
+use cubinx\Loader;
 
 class Core
 {
@@ -11,8 +13,6 @@ class Core
 
     private static function setup()
     {
-        Loader::load([
-            ''
-        ]);
+        Loader::load();
     }
 }

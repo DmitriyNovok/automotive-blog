@@ -1,5 +1,7 @@
 <?php
 
+namespace cubinx;
+
 class Loader
 {
     public static function load(...$instances)
