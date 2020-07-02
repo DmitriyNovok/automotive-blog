@@ -3,4 +3,4 @@
 $article = new Article();
 $article->load($_REQUEST['id']);
 
-require_once 'views/front/article.php';
+require_once 'views/front/Article.php';
