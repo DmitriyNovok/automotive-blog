@@ -1,4 +1,4 @@
-<?php require_once 'templates/admin/header_crud.php';?>
+<?php require_once 'templates/Admin/header_crud.php';?>
     <br>
     <h2 class="text-center">Редактировать статью</h2>
 <?php if (isset($article->title)) { ?>
@@ -35,4 +35,4 @@
 <?php } else {
     echo "<h2 class='text-center'>Такой статьи нет!</h2>";
 } ?>
-<?php require_once 'templates/admin/footer_admin.php';?>
+<?php require_once 'templates/Admin/footer_admin.php';?>

@@ -1,5 +1,6 @@
 <?php
 
+
 class DB
 {
     private static $instance = null;
@@ -18,7 +19,7 @@ class DB
                 self::$instance = new PDO($dsn, DB_USER, DB_PASS, $options);
             }catch(PDOException $e){
                 print "Error!: " . $e->getMessage() . "<br/>";
-                exit;
+                exit();
             }
         }
         return self::$instance;

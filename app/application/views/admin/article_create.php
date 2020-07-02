@@ -1,4 +1,4 @@
-<?php require_once 'templates/admin/header_crud.php';?>
+<?php require_once 'templates/Admin/header_crud.php';?>
 
 <br>
 <h2 class="text-center">Добавить новую статью</h2>
@@ -28,4 +28,4 @@
     </div>
 </form>
 
-<?php require_once 'templates/admin/footer_admin.php';?>
+<?php require_once 'templates/Admin/footer_admin.php';?>

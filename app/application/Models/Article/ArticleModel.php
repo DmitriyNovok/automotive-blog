@@ -1,7 +1,13 @@
 <?php
 
+namespace app\application\Models\Article;
 
-class Article
+use DB;
+use UserModel;
+use PDO;
+use Exception;
+
+class ArticleModel
 {
     public $id;
     public $title;
@@ -11,7 +17,7 @@ class Article
     public $date;
 
     /**
-    * @var User
+    * @var UserModel
     */
     public $user;
 
@@ -47,7 +53,7 @@ class Article
             $this->image = $row['article_image'];
             $this->icon = $row['article_icon'];
             $this->date = $row['article_date'];
-            $this->user = new User();
+            $this->user = new UserModel();
             $this->user->load($row['user_id']);
         }
     }
@@ -60,7 +66,7 @@ class Article
         $this->date = $date;
         $this->image = $image;
         $this->icon = $icon;
-        $this->user = new User();
+        $this->user = new UserModel();
         $this->user->load($user_id);
     }
 
@@ -69,23 +75,21 @@ class Article
         $id = DB::run("INSERT INTO articles (article_title, article_text, article_date, user_id)
                              VALUES (?, ?, ?)", [$title, $text, $date, $user_id]);
         $this->dataLoad($id, $title, $text, $date, $user_id, $image = false);
-        return true;
+        return $id;
     }
 
-    public function delete()
+    public function remove()
     {
         DB::run("DELETE FROM articles WHERE article_id = ?", [$this->id]);
-        return true;
     }
 
     public function update($new_title, $new_text, $new_date, $new_user_id)
     {
-        DB::run("SELECT * FROM articles WHERE article_id = ?", [$this->id]);
-        $new_user = new User();
+        $id = DB::run("SELECT * FROM articles WHERE article_id = ?", [$this->id]);
+        $new_user = new UserModel();
         $new_user->load($new_user_id);
         if ($new_user->name === NULL) {
-            var_dump('Такого пользователя не существует!');
-            return false;
+            throw new Exception('Такого пользователя не существует!');
         }
         DB::run("UPDATE articles SET article_title = ?, article_text = ?, article_date = ?, user_id = ?
                        WHERE article_id = ?", [$new_title, $new_text, $new_date, $new_user_id, $this->id]);
@@ -93,6 +97,6 @@ class Article
         $this->text = $new_text;
         $this->date = $new_date;
         $this->user = $new_user_id;
-        return true;
+        return $id;
     }
 }

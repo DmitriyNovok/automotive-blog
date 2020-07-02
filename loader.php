@@ -1,4 +1,4 @@
 <?php
-require_once 'models/Article.php';
-require_once 'models/User.php';
-require_once 'models/DB.php';
+require_once 'Models/ArticleModel.php';
+require_once 'Models/UserModel.phpl.php';
+require_once 'Models/DB.php';

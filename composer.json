@@ -4,6 +4,7 @@
     "ext-pdo" : "*",
     "ext-curl" : "*",
     "ext-json" : "*",
+    "ext-mbstring" : "*",
     "klein/klein": "^2.1"
   }
 }

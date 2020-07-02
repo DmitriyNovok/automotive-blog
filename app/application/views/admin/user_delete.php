@@ -1,4 +1,4 @@
-<?php require_once 'templates/admin/header_crud.php';?>
+<?php require_once 'templates/Admin/header_crud.php';?>
 
 <?php if (isset($user->name)) { ?>
     <div class="container">

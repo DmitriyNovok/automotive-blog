@@ -1,6 +1,6 @@
 <?php
 
-class User
+class UserModel
 {
     public $id;
     public $name;
@@ -8,21 +8,21 @@ class User
     public $password;
     /**
      * Возвращает все данные по юзерам из базы данных
-     * @return User[]
+     * @return UserModel[]
      */
     public static function getUsersAll()
     {
         $users = DB::run("SELECT * FROM users");
         $user_objects = [];
         foreach ($users as $user) {
-            $user_object = new User();
+            $user_object = new UserModel();
             $user_object->dataLoad($user['user_id'], $user['user_name'], $user['user_email'], $user['user_password']);
             $user_objects[] = $user_object;
         }
         return $user_objects;
     }
 
-    public function __construct() {}
+    public function     __construct() {}
 
     public function load($id)
     {
@@ -45,47 +45,52 @@ class User
     }
 
     /**
-     * Функция принимает на вход параметры и создает нового пользователя в базе данных
-     * @param string $name - Имя пользователя
-     * @param string $email - Email пользователя
-     * @param string $password - Пароль пользователя
-     * @return bool - true | false
+     * @param $name
+     * @param $email
+     * @param $password
+     * @return bool
+     * @throws Exception
      */
     public function create($name, $email, $password)
     {
         $id = DB::run("SELECT user_id FROM users WHERE user_email = ?", [$email]);
-        if (!$id) {
-            var_dump('Такой email уже существует!');
-            return false;
+        if (! $id) {
+            throw new Exception('Такой email уже существует!');
         }
         if (mb_strlen($password) < 4 || $password == '') {
-            var_dump('Пароль не менее 4 символа!');
-            return false;
+            throw new Exception('Пароль не менее 4 символа!');
         }
         $id = DB::run("INSERT INTO users (user_name, user_email, user_password) VALUES (?, ?, ?)", [$name, $email, $password]);
         $this->dataLoad($id, $name, $email, $password);
-        return true;
+
+        return $id;
     }
 
-    public function delete()
+    public function remove()
     {
         DB::run("DELETE FROM users WHERE user_id = ?", [$this->id]);
-        return true;
     }
 
+    /**
+     * @param $new_name
+     * @param $new_email
+     * @param $new_password
+     * @return bool
+     * @throws Exception
+     */
     public function update($new_name, $new_email, $new_password)
     {
-        DB::run("SELECT * FROM users WHERE user_id = ?", [$this->id]);
+        $id = DB::run("SELECT * FROM users WHERE user_id = ?", [$this->id]);
         if (mb_strlen($new_password) < 4 || $new_password == '') {
-            var_dump('Пароль не менее 4 символа!');
-            return false;
+            throw new Exception('Пароль не менее 4 символа!');
         }
         DB::run("UPDATE users SET  user_name = ?, user_email = ?, user_password = ?
                        WHERE user_id = ?", [$new_name, $new_email, $new_password, $this->id]);
         $this->name = $new_name;
         $this->email = $new_email;
         $this->password = $new_password;
-        return true;
+
+        return $id;
     }
 
     /**

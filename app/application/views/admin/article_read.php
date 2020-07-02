@@ -1,4 +1,4 @@
-<? require_once 'templates/admin/header_crud.php';?>
+<? require_once 'templates/Admin/header_crud.php';?>
 
 <?php  if (isset($article->title)) { ?>
     <div class="jumbotron jumbotron-fluid">
@@ -14,4 +14,4 @@
     echo "<h2 class='text-center'>Ошибка, страница не найдена </h2>";
 } ?>
 
-<?php require_once 'templates/admin/footer_admin.php';?>
+<?php require_once 'templates/Admin/footer_admin.php';?>
