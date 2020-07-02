@@ -3,7 +3,7 @@
 namespace app\application\Models\Article;
 
 use DB;
-use UserModel;
+use app\application\Models\User\UserModel;
 use PDO;
 use Exception;
 
@@ -25,22 +25,20 @@ class ArticleModel
      * Возвращает все данные по статьям из базы данных
      * @param int $limit
      * @param $order
-     * @return Article[]
+     * @return ArticleModel[]
      */
     public static function getArticlesAll($limit = 10, $order = false)
     {
-        $articles = DB::run("SELECT * FROM articles " . ($order ? 'ORDER BY article_id DESC' : '') . " LIMIT $limit");
+        $articles = DB::run("SELECT * FROM articles " . ($order ?: 'ORDER BY article_id DESC') . " LIMIT $limit");
         $article_objects = [];
         foreach ($articles as $article) {
-            $article_object = new Article();
+            $article_object = new ArticleModel();
             $article_object->dataLoad($article['article_id'], $article['article_title'], $article['article_text'],
                                           $article['article_date'], $article['user_id'], $article['article_image'], $article['article_icon']);
             $article_objects[] = $article_object;
         }
         return $article_objects;
     }
-
-    public function __construct() {}
 
     public function load($id)
     {
@@ -83,6 +81,14 @@ class ArticleModel
         DB::run("DELETE FROM articles WHERE article_id = ?", [$this->id]);
     }
 
+    /**
+     * @param $new_title
+     * @param $new_text
+     * @param $new_date
+     * @param $new_user_id
+     * @return bool|false|\PDOStatement
+     * @throws Exception
+     */
     public function update($new_title, $new_text, $new_date, $new_user_id)
     {
         $id = DB::run("SELECT * FROM articles WHERE article_id = ?", [$this->id]);

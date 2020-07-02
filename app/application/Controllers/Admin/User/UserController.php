@@ -2,7 +2,7 @@
 
 namespace controller\admin\User;
 
-use UserModel;
+use app\application\Models\User\UserModel;
 
 class UserController
 {
