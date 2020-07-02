@@ -40,8 +40,6 @@ class ArticleModel
         return $article_objects;
     }
 
-    public function __construct() {}
-
     public function load($id)
     {
         $this->id = $id;

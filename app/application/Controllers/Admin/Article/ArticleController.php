@@ -3,14 +3,14 @@
 namespace controllers\admin\Article;
 
 use UserModel;
-use Article;
+use app\application\Models\Article\ArticleModel;
 
 class ArticleController
 {
     public static function create()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $article = new Article();
+            $article = new ArticleModel();
             $article->create($_POST['article_title'], $_POST['article_text'], $_POST['article_date'], $_POST['user_id']);
             header("Location: Admin.php?dispatch=index");
         } else {
@@ -22,7 +22,7 @@ class ArticleController
     public static function remove()
     {
         if (isset($_REQUEST['id'])) {
-            $article = new Article();
+            $article = new ArticleModel();
             $article->load($_REQUEST['id']);
 
             require_once 'views/Admin/article_delete.php';
@@ -30,7 +30,7 @@ class ArticleController
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-            $article = new Article();
+            $article = new ArticleModel();
             $article->load($_REQUEST['article_id']);
             $article->delete();
 
@@ -41,13 +41,13 @@ class ArticleController
     public static function update()
     {
         if (isset($_REQUEST['id'])) {
-            $article = new Article();
+            $article = new ArticleModel();
             $article->load($_REQUEST['id']);
             $users = UserModel::getUsersAll();
             require_once 'views/Admin/article_update.php';
         }
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $article = new Article();
+            $article = new ArticleModel();
             $article->load($_REQUEST['article_id']);
             $article->update($_POST['article_title'], $_POST['article_text'], $_POST['article_date'], $_POST['user_id']);
             header("Location: Admin.php?dispatch=index");
@@ -57,7 +57,7 @@ class ArticleController
     public static function view()
     {
         if (isset($_REQUEST['id'])) {
-            $article = new Article();
+            $article = new ArticleModel();
             $article->load($_REQUEST['id']);
 
             require_once 'views/Admin/article_read.php';
