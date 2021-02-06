@@ -2,16 +2,14 @@
 
 namespace cubinx;
 
-use cubinx\Loader;
-
 class Core
 {
-    public static function run()
+    public function __construct()
     {
-
+        $this->setup();
     }
 
-    private static function setup()
+    private function setup()
     {
         Loader::load();
     }
