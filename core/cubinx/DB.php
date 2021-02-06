@@ -25,13 +25,13 @@ class DB
         return self::$instance;
     }
 
-    public static function run($query, $param = [])
+    public static function run($query, $bindings = [])
     {
-        if (!$param) {
+        if (! $bindings) {
             return self::instance()->query($query);
         }
         $pdo = self::instance()->prepare($query);
-        $pdo->execute($param);
+        $pdo->execute($bindings);
         return $pdo;
     }
 }
